@@ -701,11 +701,6 @@
 			var buttonChannel:SoundChannel = new SoundChannel();
 			button.load(new URLRequest("Sounds/Button.mp3"));
 			
-			mySound6.load(new URLRequest("Sounds/Maze_Lv1.mp3"));
-			mySound7.load(new URLRequest("Sounds/Maze_Lv2.mp3"));
-			mySound8.load(new URLRequest("Sounds/Maze_Lv3.mp3"));
-			mySound9.load(new URLRequest("Sounds/car3.mp3"));
-			
 			stage.addEventListener(Event.ENTER_FRAME,theFunction);
 
 			function theFunction(event:Event)
@@ -733,7 +728,7 @@
 							hoverTimer.addEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
 							function completeHandler(event:TimerEvent)
 							{
-								buttonChannel= button.play();
+								buttonChannel = button.play();
 							}
 
 							function hoverHandler(event:TimerEvent)
@@ -830,6 +825,8 @@
 				{
 					myChannel1.stop();
 					
+					mySound6.load(new URLRequest("Sounds/Maze_Lv1.mp3"));
+								
 					myChannel6 = mySound6.play();
 
 					theHand2.alpha = 0.5;
@@ -1081,7 +1078,6 @@
 					logoutBtn.addEventListener(MouseEvent.CLICK, clickingHandler2);
 					function clickingHandler2(event:MouseEvent)
 					{
-						gotoAndStop(3);
 						myChannel1 = mySound1.play();
 						stage.removeChild(enemy1);
 						stage.removeChild(enemy2);
@@ -1094,12 +1090,15 @@
 						stage.addEventListener(Event.ENTER_FRAME,theFunction);
 						stage.removeEventListener(MouseEvent.MOUSE_MOVE,userUpdated3);
 						stage.removeChild(myTextField);
+						gotoAndStop(3);
 					}
 				}
 
 				if ((currentFrame == 5))
 				{
 					myChannel6.stop();
+					mySound7.load(new URLRequest("Sounds/Maze_Lv2.mp3"));
+			
 					myChannel7 = mySound7.play();
 					
 					var levelOneCollision2:Array = new Array();
@@ -1421,7 +1420,7 @@
 					logoutBtn.addEventListener(MouseEvent.CLICK, clickingHandler3);
 					function clickingHandler3(event:MouseEvent)
 					{
-						gotoAndStop(3);
+						
 						myChannel1 = mySound1.play();
 						stage.removeChild(enemy4);
 						stage.removeChild(enemy5);
@@ -1435,13 +1434,15 @@
 						stage.addEventListener(Event.ENTER_FRAME,theFunction);
 						stage.removeEventListener(MouseEvent.MOUSE_MOVE,userUpdated4);
 						stage.removeChild(myTextField2);
+						gotoAndStop(3);
 					}
 				}
 
 				if ((currentFrame == 6))
 				{
 					myChannel7.stop();
-					
+					mySound8.load(new URLRequest("Sounds/Maze_Lv3.mp3"));
+			
 					myChannel8 = mySound8.play();
 
 					stage.removeEventListener(Event.ENTER_FRAME,theFunction);
@@ -1924,7 +1925,7 @@
 					logoutBtn2.addEventListener(MouseEvent.CLICK, clickingHandler);
 					function clickingHandler(event:MouseEvent)
 					{
-						gotoAndStop(3);
+						
 						myChannel1 = mySound1.play();
 						stage.removeChild(enemy8);
 						stage.removeChild(enemy9);
@@ -1939,6 +1940,7 @@
 						stage.removeEventListener(MouseEvent.MOUSE_MOVE,userUpdated5);
 						character3.alpha = 0;
 						stage.removeChild(myTextField3);
+						gotoAndStop(3);
 					}
 				}
 
@@ -1946,8 +1948,8 @@
 				{
 					myChannel8.stop();
 					myChannel1.stop();
+					mySound9.load(new URLRequest("Sounds/car3.mp3"));
 					
-					myChannel9 = mySound9.play();
 	
 					var score4:int = 0;
 					var scoreUpdating2:Timer = new Timer(1000);
@@ -2118,6 +2120,8 @@
 
 						if (theRight.x >= 480 && theRight.y >= 370)
 						{
+							myChannel9 = mySound9.play();
+							
 							moveBoxTimer.start();
 							moveBoxTimer.addEventListener(TimerEvent.TIMER, moveBoxHandler);
 
@@ -2207,15 +2211,17 @@
 					carHome.addEventListener(MouseEvent.CLICK, clickingHandler4);
 					function clickingHandler4(event:MouseEvent)
 					{
-						gotoAndStop(3);
+						
 						myChannel1 = mySound1.play();
+						myChannel9.stop();
 						poles.stop();
 						cactusRight.stop();
 						cactusLeft.stop();
 						roadLines.stop();
 						scoreUpdating2.stop();
 						moveBoxTimer.stop();
-						grannyTimer.stop();/*
+						grannyTimer.stop();
+						timer2.stop();/*
 						movingTimer2.stop();
 						movingTimer1.stop();
 						movingTimer1.removeEventListener(TimerEvent.TIMER,handler5);
@@ -2225,8 +2231,16 @@
 						stage.removeEventListener(MouseEvent.ROLL_OUT, maskOut); 
 						stage.removeEventListener(MouseEvent.ROLL_OVER, maskOver);
 						stage.removeEventListener(MouseEvent.MOUSE_OVER, startDrawing);
-						stage.removeChild(theRight);
-						stage.removeChild(mirror);
+						moveRightTimer.stop();
+						moveLeftTimer.stop();
+						moveRightTimer.removeEventListener(TimerEvent.TIMER, movingRight);
+						moveLeftTimer.removeEventListener(TimerEvent.TIMER, movingLeft);
+						removeChild(theRight);
+						removeChild(mirror);
+						removeChild(erasableBitmap);
+						stage.removeChild(myTextField4);
+						stage.removeChild(timeRemaning);
+						gotoAndStop(3);
 					}
 				}
 			}
